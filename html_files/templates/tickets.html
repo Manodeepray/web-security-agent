@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>🎫 Support Tickets</h2>
+
+<a href="{{ url_for('add_ticket') }}">➕ Add New Ticket</a>
+
+{% if tickets %}
+    <ul>
+    {% for ticket in tickets.values() %}
+        <li>
+            <strong>{{ ticket.subject }}</strong> (Contact ID: {{ ticket.contact_id }})
+            <br>
+            <a href="{{ url_for('ticket_detail', id=ticket.id) }}">🔍 View</a>
+        </li>
+        <hr>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No tickets found.</p>
+{% endif %}
+{% endblock %}

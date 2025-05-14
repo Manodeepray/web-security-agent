@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Welcome to the MiniCRM Dashboard</h2>
+<p>Select a section to get started:</p>
+
+<ul>
+    <li><a href="{{ url_for('contacts') }}">Manage Contacts</a></li>
+    <li><a href="{{ url_for('tickets') }}">Manage Support Tickets</a></li>
+    <li><a href="{{ url_for('admin') }}">Admin Settings</a></li>
+</ul>
+{% endblock %}

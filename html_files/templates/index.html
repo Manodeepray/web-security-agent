@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>👋 Welcome to MiniCRM</h1>
+
+<p>This is a lightweight CRM tool built with Flask.</p>
+
+<a href="{{ url_for('dashboard') }}">
+    <button>🚀 Go to Dashboard</button>
+</a>
+{% endblock %}

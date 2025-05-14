@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MiniCRM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>MiniCRM Dashboard</h1>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">🏠 Dashboard</a> |
+            <a href="{{ url_for('contacts') }}">📇 Contacts</a> |
+            <a href="{{ url_for('tickets') }}">🎫 Tickets</a> |
+            <a href="{{ url_for('admin') }}">⚙️ Admin</a>
+        </nav>
+        <hr>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="flash {{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>⚙️ Admin Settings</h2>
+
+<form action="{{ url_for('admin_settings_view') }}" method="post">
+    <label for="site_name">Site Name:</label><br>
+    <input type="text" name="site_name" value="{{ settings.site_name }}"><br><br>
+
+    <label for="support_email">Support Email:</label><br>
+    <input type="email" name="support_email" value="{{ settings.support_email }}"><br><br>
+
+    <button type="submit">Save Settings</button>
+</form>
+
+<p><a href="{{ url_for('dashboard') }}">← Back to Dashboard</a></p>
+{% endblock %}

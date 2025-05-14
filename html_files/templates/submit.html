@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Submit a Comment (Stored XSS Test)</h2>
+<form method="POST">
+    <input name="comment" placeholder="Type a comment">
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

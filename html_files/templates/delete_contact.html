@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>🗑️ Delete Contact</h2>
+
+<p>Are you sure you want to delete the contact: <strong>{{ contact.name }}</strong>?</p>
+<p>Email: {{ contact.email }}</p>
+
+<form action="{{ url_for('delete_contact', id=contact.id) }}" method="post">
+    <button type="submit">✅ Yes, Delete</button>
+    <a href="{{ url_for('contacts') }}">❌ Cancel</a>
+</form>
+{% endblock %}

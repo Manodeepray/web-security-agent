@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>📄 Ticket Details</h2>
+
+<p><strong>Subject:</strong> {{ ticket.subject }}</p>
+<p><strong>Description:</strong></p>
+<p>{{ ticket.description | safe }}</p>
+<p><strong>Contact ID:</strong> {{ ticket.contact_id }}</p>
+
+<p><a href="{{ url_for('tickets') }}">← Back to Tickets</a></p>
+{% endblock %}

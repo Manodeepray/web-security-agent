@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>➕ Add Support Ticket</h2>
+
+<form method="POST" action="{{ url_for('add_ticket') }}">
+    <label for="contact_id">Contact:</label>
+    <select name="contact_id" required>
+        {% for contact in contacts %}
+        <option value="{{ contact.id }}">{{ contact.name }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="issue">Issue Description:</label>
+    <textarea name="issue" required></textarea>  <!-- 💡 This is the missing field -->
+
+    <button type="submit">Submit Ticket</button>
+</form>
+
+
+<p><a href="{{ url_for('tickets') }}">← Back to Tickets</a></p>
+{% endblock %}

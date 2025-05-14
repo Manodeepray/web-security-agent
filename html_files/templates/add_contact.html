@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>➕ Add New Contact</h2>
+
+<form action="{{ url_for('add_contact') }}" method="post">
+    <label for="name">Name:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label for="email">Email:</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label for="notes">Notes:</label><br>
+    <textarea name="notes" rows="4" cols="50"></textarea><br><br>
+
+    <button type="submit">Save Contact</button>
+</form>
+
+<p><a href="{{ url_for('contacts') }}">← Back to Contacts</a></p>
+{% endblock %}
