@@ -1,12 +1,11 @@
 ---
-Task: 6. Save a new contact by clicking the "Save Contact" button on the contacts add page
+Task: 6. Save settings by filling out the form on the admin/settings page and submitting it via the 'Save Settings' button
 Workflow:
-Step 1: Navigate to http://127.0.0.1:5000/dashboard
-Step 2: Click on the link that navigates to http://127.0.0.1:5000/contacts
-Step 3: On the http://127.0.0.1:5000/contacts page, click on the link that navigates to http://127.0.0.1:5000/contacts/add
-Step 4: On the http://127.0.0.1:5000/contacts/add page, fill out the form with the required information: 
-    - Fill input type 'text' with name 'name' with the contact's name
-    - Fill input type 'email' with name 'email' with the contact's email
-    - Fill textarea type with name 'notes' with any additional notes about the contact
-Step 5: On the http://127.0.0.1:5000/contacts/add page, locate the button with type 'submit' and text 'Save Contact' and click it, which will submit the form to http://127.0.0.1:5000/contacts/add via the POST method
-Step 6: After submitting the form, the new contact should be saved and the page should redirect to one of the linked pages (http://127.0.0.1:5000/dashboard, http://127.0.0.1:5000/contacts, http://127.0.0.1:5000/tickets, http://127.0.0.1:5000/admin) as per the given context.
+Step 1: Navigate to the admin/settings page by going to http://127.0.0.1:5000/admin/settings.
+Step 2: Locate the form on the page with action="/admin/settings" and method="POST".
+Step 3: Fill out the form with the required inputs: 
+    - site_name (text input)
+    - support_email (email input)
+Step 4: Locate the button with type="submit" and text="Save Settings".
+Step 5: Press the "Save Settings" button to submit the form with the POST method to /admin/settings.
+Step 6: Verify that the settings have been saved successfully.
