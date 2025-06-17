@@ -1,0 +1,23 @@
+Screen {
+    layout: vertical;
+    align: center middle;
+    padding: 2;
+}
+
+#url_input {
+    width: 60%;
+    border: solid green;
+}
+
+#run_button {
+    margin-top: 1;
+}
+
+#status {
+    height: 20;
+    width: 90%;
+    padding: 1;
+    border: solid blue;
+    overflow: auto;
+}
+

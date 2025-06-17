@@ -1,27 +1,39 @@
-raw_tasks = """
-1. Navigate from dashboard to contacts, tickets, or admin page
-#####
-2. Navigate from contacts to dashboard, tickets, admin, or add contact page
-#####
-3. Search for a contact using the search form on the contacts page
-#####
-4. Navigate from tickets to dashboard, contacts, admin, or add ticket page
-#####
-5. Add a new contact by filling out the form on the add contact page and submitting it
-#####
-6. Submit a new ticket by filling out the form on the add ticket page and submitting it
-#####
-7. Navigate from admin settings to dashboard, contacts, tickets, or admin page
-#####
-8. Save admin settings by filling out the form on the admin settings page and submitting it
-#####
-9. Navigate from add contact page to dashboard, contacts, tickets, or admin page
-#####
-10. Navigate from add ticket page to dashboard, contacts, tickets, or admin page
-"""
+from rich import print
+from rich.panel import Panel
+from rich.console import Console
 
-# Split by delimiter and clean up
-task_list = [task.strip() for task in raw_tasks.split("#####") if task.strip()]
+console = Console()
+
+def showExploitToolsMenu():
+    tools = {
+        "1": "XSS scripting ",
+        "2": "SQL injection (will be added in future)",
+        "exit":"EXIT the app"
+    }
+
+    menu_text = "\n".join([f"[bold cyan]{k}[/bold cyan]: {v}" for k, v in tools.items()])
+    console.print(Panel(menu_text, title="Available Tools", border_style="green"))
+
+    while True:
+        choice = input("Enter option number: ").strip()
+        if choice in tools:
+            console.print(f"[bold green]You chose:[/bold green] {tools[choice]}")
+            return choice
+        else:
+            console.print("[bold red]Invalid choice. Try again.[/bold red]")
+
+# Example usage after your webscanner or pipeline runs
+if __name__ == "__main__":
+    print(Panel("[bold green]Web Scanner Completed[/bold green]", title="Status"))
+    user_choice = showExploitToolsMenu()
+
+    # Dummy handlers
+    if user_choice == "1":
+        print(">> Running XSS exploit scanner ...")
+    elif user_choice == "2":
+        print(">> Running SQL injection exploit scanner...")
+    elif user_choice == "exit":
+        print(">> exiting agent agent...")
 
 
-    
+
