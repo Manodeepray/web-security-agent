@@ -98,40 +98,66 @@ def parse_form_fields(html):
 
 async def fill_form_fields(page, values: dict):
     """
-    Fill out and submit a form using the parsed input names and user-provided values.
-    
+    Fill out and submit a form using parsed field names and user-provided values.
     Args:
-        state: LangGraph agent state with a Puppeteer page
-        form_html: HTML string of the <form>
-        values: Dict of field names and their values (e.g., {"name": "John", "email": "john@example.com"})
+        page: Pyppeteer page object
+        values: Dict of field names and their values
     """
     for field_name, field_value in values.items():
-        selector = f'input[name="{field_name}"], textarea[name="{field_name}"]'
-        print(selector , field_value)
+
+        # field_value = "<script>alert('XSS Attack!');</script>"
+
+
+        selector = f'input[name="{field_name}"], textarea[name="{field_name}"], select[name="{field_name}"]'
+        print(f"Filling: {selector} -> {field_value}")
         try:
             await page.waitForSelector(selector, timeout=2000)
-            await page.type(selector, field_value)
-            print(f"✅ Filled successfully {field_name}:")
-            print(f"✅ page = {page.url}")
-            
-        
-            
+
+            # Clear the input value using evaluate safely
+            await page.evaluate(
+                """(selector) => {
+                    const el = document.querySelector(selector);
+                    if (el) el.value = "";
+                }""",
+                selector
+            )
+
+            # Handle <select> separately if needed
+            tag_name = await page.evaluate(
+                """(selector) => {
+                    const el = document.querySelector(selector);
+                    return el ? el.tagName.toLowerCase() : null;
+                }""",
+                selector
+            )
+
+            if tag_name == "select":
+                await page.select(selector, field_value)
+            else:
+                await page.type(selector, field_value)
+
         except Exception as e:
             print(f"⚠️ Failed to fill {field_name}: {e}")
-            print(f"⚠️ page = {page.url}")
 
-    await page.click('button[type="submit"], input[type="submit"]')
-    # await page.waitForNavigation(timeout=5000)
-    print("✅ Form submitted.")
-    return "✅ Form submitted."
-    # # Try to click the submit button after filling the form
-    # try:
-    #     await page.click('button[type="submit"], input[type="submit"]')
-    #     await page.waitForNavigation(timeout=5000)
-    #     print("✅ Form submitted.")
-        
-    # except Exception as e:
-    #     return f"⚠️ Failed to submit form: {e}"
+    # Try to click the submit button
+    try:
+        submit_selectors = [
+            'form button[type="submit"]',
+            'form input[type="submit"]',
+            'button[type="submit"]',
+            'input[type="submit"]'
+        ]
+        for submit_selector in submit_selectors:
+            try:
+                await page.waitForSelector(submit_selector, timeout=1000)
+                await page.click(submit_selector)
+                await page.waitForNavigation(timeout=5000)
+                return "✅ Form submitted."
+            except:
+                continue
+        return "⚠️ No submit button found."
+    except Exception as e:
+        return f"⚠️ Failed to submit form: {e}"
 
 
 
